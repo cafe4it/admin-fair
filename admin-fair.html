@@ -13,10 +13,16 @@
         <div class="col-md-12">
             <h1 class="header">Danh sách đăng ký triển lãm 09/2015</h1>
             {{#if isReady}}
+            <div class="table-responsive">
                 {{> reactiveTable settings=settings}}
+            </div>
             {{else}}
                 <p>Đang tải dữ liệu...</p>
             {{/if}}
         </div>
     </div>
+</template>
+
+<template name="readMore">
+    <a href="#">Chi tiết</a>
 </template>

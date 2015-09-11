@@ -54,6 +54,8 @@ if (Meteor.isClient) {
                     {key : 'Dangkyluc', label : 'Đăng ký lúc', fn : function(v,o){
                         return moment(v).format('DD/MM/YYYY , HH:mm:ss');
                     },sortOrder: 0, sortDirection: 'descending'},
+                    {key : 'Dudinhduhoctai', label : 'DĐ du học', sortable: false},
+                    {key : 'BietSrvnqua', label : 'Nguồn', sortable: false},
                 ]
             }
         }
