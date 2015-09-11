@@ -1,0 +1,22 @@
+<head>
+    <title>Danh sách đăng ký triển lãm 09/2015</title>
+</head>
+
+<body>
+<div class="container">
+    {{> adminFair}}
+</div>
+</body>
+
+<template name="adminFair">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="header">Danh sách đăng ký triển lãm 09/2015</h1>
+            {{#if isReady}}
+                {{> reactiveTable settings=settings}}
+            {{else}}
+                <p>Đang tải dữ liệu...</p>
+            {{/if}}
+        </div>
+    </div>
+</template>
