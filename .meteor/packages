@@ -9,3 +9,8 @@ twbs:bootstrap
 reactive-var
 momentjs:moment
 aslagle:reactive-table
+kadira:flow-router
+kadira:blaze-layout
+arillo:flow-router-helpers
+underscorestring:underscore.string
+mrt:flash-messages

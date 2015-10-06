@@ -1,18 +1,37 @@
 <head>
     <title>Danh sách đăng ký triển lãm 09/2015</title>
+    <script type="text/javascript" src="/validator.min.js"></script>
+    <script type="text/javascript" src="/bootstrap-multiselect.js"></script>
+    <script type="text/javascript" src="/jquery.maskedinput.min.js"></script>
+    <link rel="stylesheet" href="/bootstrap-multiselect.css"/>
 </head>
 
-<body>
-<div class="container">
-    {{> adminFair}}
-</div>
-</body>
+<template name="layout">
+    <div class="container">
+        <ul class="nav nav-pills">
+            <li role="presentation" class="{{isActiveRoute 'home'}}"><a href="{{pathFor 'home'}}">Kết quả Online</a></li>
+            <li role="presentation" class="{{isActiveRoute 'input1'}}"><a href="{{pathFor 'input1'}}">Nhập liệu thủ công</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        {{> Template.dynamic template=main}}
+    </div>
+</template>
 
 <template name="adminFair">
     <div class="row">
         <div class="col-md-12">
             <h1 class="header">Danh sách đăng ký triển lãm 09/2015</h1>
-            {{#if isReady}}
+            {{#if subsReady}}
+            <h3>
+                <p><span class="label label-danger"><a class="filter" href="/?diadiem=Hà Nội">Hà Nội : {{getCount 'Hà Nội'}}</a></span> &nbsp; <span class="label label-danger">Check-in : {{getCountCheckIn 'Hà Nội'}}</span> &nbsp; <span class="label label-danger">Đã lấy vé : {{getCountTicket 'Hà Nội'}}</span></p>
+                <p><span class="label label-primary"><a class="filter" href="/?diadiem=Hải Phòng">Hải Phòng : {{getCount 'Hải Phòng'}}</a></span>&nbsp; <span class="label label-primary">Check-in : {{getCountCheckIn 'Hải Phòng'}}</span> &nbsp; <span class="label label-primary">Đã lấy vé : {{getCountTicket 'Hải Phòng'}}</span></p>
+                <p><span class="label label-info"><a class="filter" href="/?diadiem=Tp.Hồ Chí Minh">TP.HCM : {{getCount 'Tp.Hồ Chí Minh'}}</a></span>&nbsp; <span class="label label-info">Check-in : {{getCountCheckIn 'Tp.Hồ Chí Minh'}}</span> &nbsp; <span class="label label-info">Đã lấy vé : {{getCountTicket 'Tp.Hồ Chí Minh'}}</span></p>
+            </h3>
+                <hr/>
+            <p>
+                {{> flashMessages}}
+            </p>
             <div class="table-responsive">
                 {{> reactiveTable settings=settings}}
             </div>
@@ -23,6 +42,219 @@
     </div>
 </template>
 
-<template name="readMore">
-    <a href="#">Chi tiết</a>
+<template name="input1">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="header">Nhập liệu thủ công : <a href="{{pathFor 'input1'}}/?diadiem=Hà Nội">Hà Nội</a>, <a href="{{pathFor 'input1'}}/?diadiem=Hải Phòng">Hải Phòng</a>, <a href="{{pathFor 'input1'}}/?diadiem=Tp.Hồ Chí Minh">Tp.Hồ Chí Minh</a></h3>
+            <p>
+                {{> flashMessages}}
+            </p>
+            <form role="form" id="myForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" id="txtFullName" ref="txtFullName" name="name"
+                                           data-minlength="5" class="form-control"
+                                           placeholder="Họ và tên" required
+                                           data-error="Xin nhập đầy đủ Họ và Tên"/>
+
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" id="txtBod" ref="txtBod" name="bod"
+                                           class="form-control"
+                                           placeholder="Ngày sinh"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="email" id="txtEmail" ref="txtEmail" name="email"
+                                           class="form-control" placeholder="Địa chỉ Email" required
+                                           data-error="Xin nhập địa chỉ Email"/>
+
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" id="txtPhone" ref="txtPhone" name="phone"
+                                           class="form-control" placeholder="Số điện thoại"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="text" id="txtAddress" ref="txtAddress" name="address"
+                                           class="form-control" placeholder="Địa chỉ" />
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" id="txtIELTS" ref="txtIELTSTOEFL" name="IELTSTOEFL"
+                                           class="form-control" placeholder="Điểm IELTS/TOEFL" />
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <select id="sltIELTS" ref="sltIELTS" class="form-control slt-multi" multiple="multiple">
+                                        <option value="" defaultvalue>Không có nhu cầu</option>
+                                        <option value="IELTS">IETLS</option>
+                                        <option value="TOEFL">TOEFL</option>
+                                        <option value="SAT">SAT</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <select id="sltObject" ref="sltObject" class="form-control" required
+                                    data-error="Xin bạn chọn 1 giá trị">
+                                <option value="" disabled="" defaultvalue>Bạn là</option>
+                                <option value="Học sinh THCS">Học sinh THCS</option>
+                                <option value="Học sinh THPT">Học sinh THPT</option>
+                                <option value="Sinh viên">Sinh viên</option>
+                                <option value="Đang đi làm">Đang đi làm</option>
+                                <option value="Phụ huynh">Phụ huynh</option>
+                                <option value="Khác">Khác</option>
+                            </select>
+
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <select id="sltLocation" ref="sltLocation" class="form-control"
+                                    required data-error="Xin bạn chọn 1 giá trị">
+                                <option value="" disabled="" defaultValue>Bạn sẽ tham dự triển lãm
+                                    tại
+                                </option>
+                                <option value="Hà Nội">HN - Trung tâm Star Galaxy 17:00 - 20:00 NGÀY
+                                    30/09/2015, 87 Láng Hạ
+                                </option>
+                                <option value="Hải Phòng">HP - Nhà hát lớn Hải Phòng 9:00 - 12:00
+                                    NGÀY 27/09/2015
+                                </option>
+                                <option value="Tp.Hồ Chí Minh">HCM - KS Liberty Central Saigon 9:00
+                                    - 12:00 NGÀY 04/10/2015 , 59-61 Pastuer Quận 1
+                                </option>
+                            </select>
+
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="sltYears" ref="sltYears" required
+                                    data-error="Xin bạn chọn 1 giá trị">
+                                <option value="" disabled="" defaultvalue>Thời gian dự định du học
+                                </option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="Khác">Khác</option>
+                            </select>
+
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <select class="form-control slt-multi" id="sltCountry"
+                                            ref="sltCountry" multiple="multiple" required
+                                            data-error="Xin bạn chọn ít nhất 1 giá trị">
+                                        <option value="Anh">Anh</option>
+                                        <option value="Mỹ">Mỹ</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Úc">Úc</option>
+                                        <option value="Đức">Đức</option>
+                                        <option value="Phần Lan">Phần Lan</option>
+                                        <option value="Malaysia">Malaysia</option>
+                                        <option value="Thái Lan">Thái Lan</option>
+                                        <option value="Thuỵ Sỹ">Thuỵ Sỹ</option>
+                                        <option value="Hà Lan">Hà Lan</option>
+                                        <option value="Newzealand">New Zealand</option>
+                                        <option value="Ý">Ý</option>
+                                        <option value="Hàn Quốc">Hàn Quốc</option>
+                                        <option value="Nhật bản">Nhật bản</option>
+                                        <option value="Trung Quốc">Trung quốc</option>
+                                        <option value="Khác">Khác</option>
+                                    </select>
+
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <select class="form-control slt-multi" id="sltKnowMe"
+                                            ref="sltKnowMe" multiple="multiple" required
+                                            data-error="Xin bạn chọn ít nhất 1 giá trị">
+                                        <option value="Facebook SunriseVietnam">Facebook SunriseVietnam
+                                        </option>
+                                        <option value="Website SunriseVietnam">Website SunriseVietnam
+                                        </option>
+                                        <option value="Email">Email</option>
+                                        <option value="Google">Google</option>
+                                        <option value="Băng rôn">Băng rôn</option>
+                                        <option value="Bạn bè giới thiệu">Bạn bè giới thiệu</option>
+                                        <option value="Dân trí">Dân trí</option>
+                                        <option value="Vnexpress">Vnexpress</option>
+                                        <option value="Khác">Khác</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-left">
+                            <button type="submit" class="btn btn-primary">Lưu lại</button>
+                            <button class="btn btn-default btn-reset">Làm lại</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-12">
+            {{#if subsReady}}
+                <div class="table-responsive">
+                    {{> reactiveTable settings=settings}}
+                </div>
+            {{else}}
+                <p>Đang tải dữ liệu...</p>
+            {{/if}}
+        </div>
+    </div>
+</template>
+
+<template name="checkIn">
+    <div class="checkbox text-center">
+        <label>
+            <input type="checkbox" class="CHECKIN" {{isCheckIn}}>
+        </label>
+    </div>
+</template>
+
+<template name="getTicket">
+    <div class="checkbox text-center">
+        <label>
+            <input type="checkbox" class="GETTICKET" {{isGotTicket}} data-toggle="tooltip" data-placement="left" title="{{getTicketAt}}">
+        </label>
+    </div>
+</template>
+
+<template name="removeRegister">
+    <button class="btn btn-danger btn-remove">Xoá</button>
 </template>

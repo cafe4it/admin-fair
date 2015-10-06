@@ -1,1 +1,26 @@
 /* CSS declarations go here */
+.check-in {
+    background-color: khaki;
+}
+
+.get-ticket {
+    background-color: indianred;
+}
+
+.remove-cell {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.CHECKIN, .GETTICKET{
+    width: 24px; /*Desired width*/
+    height: 24px; /*Desired height*/
+}
+
+tr td {
+    vertical-align: middle !important;
+}
+
+a.filter{
+    color: white !important;
+}
