@@ -9,7 +9,8 @@ if (Meteor.isClient) {
         self.selectedCountries = new ReactiveVar();
         self.selectedStatus = new ReactiveVar();
         self.setFilter = new ReactiveVar();
-        self.subsReady = new ReactiveVar();
+        self.subsIsReady = new ReactiveVar();
+        self.params = new ReactiveVar();
         self.autorun(function (c) {
             if (self.setFilter.get() && self.setFilter.get() === true) {
                 var params = {};
@@ -32,19 +33,22 @@ if (Meteor.isClient) {
                 if(self.selectedYear.get()){
                     params = _.extend(params, {Thoigiandudinh : self.selectedYear.get()});
                 }
-                console.log(params);
-                self.subsReady = self.subscribe('getRegisters',params);
+                //subs.clear();
+                var subsRegisters = subs.subscribe('getRegisters',params);
+                self.params.set(params);
+                self.subsIsReady.set(subsRegisters);
             }
         })
     });
 
     Template.reportDetail.helpers({
         isReady : function(){
-            return (RegistersCheckin.find().count()>0);
+            var subs = Template.instance().subsIsReady.get();
+            return (subs && subs.ready());
         },
         settings: function () {
-            var registers = RegistersCheckin.find();
-            console.log(registers);
+            var params = Template.instance().params.get() || {};
+            var registers = RegistersCheckin.find(params);
             return {
                 collection: registers,
                 rowsPerPage: 50,

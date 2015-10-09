@@ -1,7 +1,12 @@
 //Meteor.connection = DDP.connect('http://fair.sunrisevietnam.com');
 Registers = new Meteor.Collection('registers');
 RegistersCheckin = new Meteor.Collection('registers_checkin');
-
+subs = new SubsManager({
+    // maximum number of cache subscriptions
+    cacheLimit: 10,
+    // any subscription will be expire after 5 minute, if it's not subscribed again
+    expireIn: 5
+});
 FlowRouter.route('/', {
     name: 'home',
     subscriptions: function (p, q) {
@@ -9,9 +14,9 @@ FlowRouter.route('/', {
             var params = {
                 Thamdutai: q.diadiem
             }
-            this.register('myRegisters', Meteor.subscribe('getRegisters', params));
+            this.register('myRegisters', subs.subscribe('getRegisters', params));
         } else {
-            this.register('myRegisters', Meteor.subscribe('getRegisters', {}));
+            this.register('myRegisters', subs.subscribe('getRegisters', {}));
         }
     },
     action: function (p, q) {
@@ -27,9 +32,9 @@ FlowRouter.route('/nhap-lieu-thu-cong', {
                 Thamdutai: q.diadiem,
                 Nhapthucong : {$exists : true}
             }
-            this.register('myRegisters', Meteor.subscribe('getRegisters', params));
+            this.register('myRegisters', subs.subscribe('getRegisters', params));
         } else {
-            this.register('myRegisters', Meteor.subscribe('getRegisters', {Nhapthucong : {$exists : true}}));
+            this.register('myRegisters', subs.subscribe('getRegisters', {Nhapthucong : {$exists : true}}));
         }
     },
     action: function (p, q) {
@@ -43,11 +48,11 @@ FlowRouter.route('/lay-ve-xem-phim',{
         if (q.diadiem) {
             var params = {
                 Thamdutai: q.diadiem,
-                Daden : true
+                Nhapthucong : {$exists : true}
             }
-            this.register('myRegisters', Meteor.subscribe('getRegisters', params));
+            this.register('myRegisters', subs.subscribe('getRegisters', params));
         } else {
-            this.register('myRegisters', Meteor.subscribe('getRegisters', {Daden : true}));
+            this.register('myRegisters', subs.subscribe('getRegisters', {Nhapthucong : {$exists : true}}));
         }
     },
     action: function (p, q) {
@@ -57,6 +62,9 @@ FlowRouter.route('/lay-ve-xem-phim',{
 
 FlowRouter.route('/bao-cao-chi-tiet',{
     name : "reportDetail",
+    subscriptions : function(p,q){
+        this.register('myRegisters', subs.subscribe('getRegisters'));
+    },
     action: function (p, q) {
         BlazeLayout.render('layout', {main: 'reportDetail'});
     }

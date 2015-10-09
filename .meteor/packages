@@ -14,3 +14,5 @@ kadira:blaze-layout
 arillo:flow-router-helpers
 underscorestring:underscore.string
 mrt:flash-messages
+meteorhacks:subs-manager
+meteorhacks:fast-render

@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="header">Danh sách đăng ký triển lãm 09/2015</h1>
-            {{#if subsReady}}
+            {{#if subsReady 'myRegisters'}}
             <h3>
                 <p><span class="label label-danger"><a class="filter" href="/?diadiem=Hà Nội">Hà Nội : {{getCount 'Hà Nội'}}</a></span> &nbsp; <span class="label label-danger">Check-in : {{getCountCheckIn 'Hà Nội'}}</span> &nbsp; <span class="label label-danger">Đã lấy vé : {{getCountTicket 'Hà Nội'}}</span></p>
                 <p><span class="label label-primary"><a class="filter" href="/?diadiem=Hải Phòng">Hải Phòng : {{getCount 'Hải Phòng'}}</a></span>&nbsp; <span class="label label-primary">Check-in : {{getCountCheckIn 'Hải Phòng'}}</span> &nbsp; <span class="label label-primary">Đã lấy vé : {{getCountTicket 'Hải Phòng'}}</span></p>
@@ -228,7 +228,7 @@
     <br/>
     <div class="row">
         <div class="col-md-12">
-            {{#if subsReady}}
+            {{#if subsReady 'myRegisters'}}
                 <div class="table-responsive">
                     {{> reactiveTable settings=settings}}
                 </div>
