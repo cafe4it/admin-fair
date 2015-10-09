@@ -61,10 +61,54 @@ if (Meteor.isClient) {
         },
         table2 : function(cc,pp){
             return RegistersCheckin.find({Daden : true, Thamdutai : cc, BietSrvnqua : pp}).count()
+        },
+        table3 : function(a,b){
+            var diadiem = 'Hà Nội';
+            switch(a){
+                case 1:
+                    diadiem = 'Hải Phòng';
+                    break;
+                case 2:
+                    diadiem = 'Tp.Hồ Chí Minh';
+                    break;
+                case 0:
+                default :
+                    diadiem = 'Hà Nội';
+                    break;
+            }
+            return RegistersCheckin.find({Daden : true, Thamdutai : diadiem, Dudinhduhoctai : b}).count()
+        },
+        table4 : function(a,b){
+            var diadiem = 'Hà Nội';
+            switch(a){
+                case 1:
+                    diadiem = 'Hải Phòng';
+                    break;
+                case 2:
+                    diadiem = 'Tp.Hồ Chí Minh';
+                    break;
+                case 0:
+                default :
+                    diadiem = 'Hà Nội';
+                    break;
+            }
+            return RegistersCheckin.find({Daden : true, Thamdutai : diadiem, Nguoidangkyla : b}).count()
+        },
+        table5 : function(a,b){
+            var diadiem = 'Hà Nội';
+            switch(a){
+                case 1:
+                    diadiem = 'Hải Phòng';
+                    break;
+                case 2:
+                    diadiem = 'Tp.Hồ Chí Minh';
+                    break;
+                case 0:
+                default :
+                    diadiem = 'Hà Nội';
+                    break;
+            }
+            return RegistersCheckin.find({Daden : true, Thamdutai : diadiem, Thoigiandudinh : b}).count()
         }
     });
-    var ij = 1;
-    var getLength1 = function(c, p){
-        return _.size(_.filter(c, function(i){ return (_.indexOf(i.BietSrvnqua,p) > -1)}))
-    }
 }

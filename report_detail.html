@@ -1,0 +1,124 @@
+<template name="reportDetail">
+    <div class="row">
+        <div class="col-md-12">
+            <br/>
+            <form role="form" id="myForm">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <select id="sltLocation" ref="sltLocation" class="form-control"
+                                    required data-error="Xin bạn chọn 1 giá trị">
+                                <option defaultvalue value="Hà Nội">Hà Nội
+                                </option>
+                                <option value="Hải Phòng">Hải Phòng
+                                </option>
+                                <option value="Tp.Hồ Chí Minh">Tp.Hồ Chí Minh
+                                </option>
+                            </select>
+
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <select class="form-control slt-multi" id="sltCountry"
+                                    ref="sltCountry" multiple="multiple" required
+                                    data-error="Xin bạn chọn ít nhất 1 giá trị">
+                                <option value="Anh">Anh</option>
+                                <option value="Mỹ">Mỹ</option>
+                                <option value="Canada">Canada</option>
+                                <option value="Úc">Úc</option>
+                                <option value="Đức">Đức</option>
+                                <option value="Phần Lan">Phần Lan</option>
+                                <option value="Malaysia">Malaysia</option>
+                                <option value="Thái Lan">Thái Lan</option>
+                                <option value="Thuỵ Sỹ">Thuỵ Sỹ</option>
+                                <option value="Hà Lan">Hà Lan</option>
+                                <option value="Newzealand">New Zealand</option>
+                                <option value="Ý">Ý</option>
+                                <option value="Hàn Quốc">Hàn Quốc</option>
+                                <option value="Nhật bản">Nhật bản</option>
+                                <option value="Trung Quốc">Trung quốc</option>
+                                <option value="Khác">Khác</option>
+                            </select>
+
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <select id="sltObject" ref="sltObject" class="form-control" required
+                                    data-error="Xin bạn chọn 1 giá trị">
+                                <option value="" defaultvalue>Đối tượng</option>
+                                <option value="Học sinh THCS">Học sinh THCS</option>
+                                <option value="Học sinh THPT">Học sinh THPT</option>
+                                <option value="Sinh viên">Sinh viên</option>
+                                <option value="Đang đi làm">Đang đi làm</option>
+                                <option value="Phụ huynh">Phụ huynh</option>
+                                <option value="Khác">Khác</option>
+                            </select>
+
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <select class="form-control" id="sltYears" ref="sltYears" required
+                                    data-error="Xin bạn chọn 1 giá trị">
+                                <option value="" defaultvalue>Năm du học
+                                </option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="Khác">Khác</option>
+                            </select>
+
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <select id="sltStatus" class="form-control">
+                                <option value="1" defaultvalue>Đã đến TL</option>
+                                <option value="0">Không đến</option>
+                                <option value="-1">Tất cả</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <select id="sltIELTS" ref="sltIELTS" class="form-control slt-multi" multiple="multiple">
+                                <option value="" defaultvalue>Không có nhu cầu</option>
+                                <option value="IELTS">IETLS</option>
+                                <option value="TOEFL">TOEFL</option>
+                                <option value="SAT">SAT</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary btn-filter">Tìm kiếm</button>
+                        &nbsp;
+                        <button class="btn btn-default btn-reset">Làm lại</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+
+    <div class="row">
+        <div class="col-md-12">
+            {{#if isReady}}
+                <div class="table-responsive">
+                    {{> reactiveTable settings=settings}}
+                </div>
+            {{else}}
+                <p>Đang tải dữ liệu...</p>
+            {{/if}}
+        </div>
+    </div>
+</template>

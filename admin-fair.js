@@ -53,6 +53,13 @@ FlowRouter.route('/lay-ve-xem-phim',{
     action: function (p, q) {
         BlazeLayout.render('layout', {main: 'input2'});
     }
+});
+
+FlowRouter.route('/bao-cao-chi-tiet',{
+    name : "reportDetail",
+    action: function (p, q) {
+        BlazeLayout.render('layout', {main: 'reportDetail'});
+    }
 })
 
 if (Meteor.isClient) {
