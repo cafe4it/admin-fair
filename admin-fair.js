@@ -15,7 +15,7 @@ FlowRouter.route('/', {
         }
     },
     action: function (p, q) {
-        BlazeLayout.render('layout', {main: 'adminFair'});
+        BlazeLayout.render('layout', {main: 'report'});
     }
 });
 
@@ -34,6 +34,24 @@ FlowRouter.route('/nhap-lieu-thu-cong', {
     },
     action: function (p, q) {
         BlazeLayout.render('layout', {main: 'input1'});
+    }
+});
+
+FlowRouter.route('/lay-ve-xem-phim',{
+    name : "input2",
+    subscriptions : function(p,q){
+        if (q.diadiem) {
+            var params = {
+                Thamdutai: q.diadiem,
+                Daden : true
+            }
+            this.register('myRegisters', Meteor.subscribe('getRegisters', params));
+        } else {
+            this.register('myRegisters', Meteor.subscribe('getRegisters', {Daden : true}));
+        }
+    },
+    action: function (p, q) {
+        BlazeLayout.render('layout', {main: 'input2'});
     }
 })
 

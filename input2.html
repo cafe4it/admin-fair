@@ -1,0 +1,22 @@
+<template name="input2">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="header">Điểm danh lấy vé : <a href="{{pathFor 'input2'}}/?diadiem=Hà Nội">Hà Nội</a>, <a href="{{pathFor 'input2'}}/?diadiem=Hải Phòng">Hải Phòng</a>, <a href="{{pathFor 'input2'}}/?diadiem=Tp.Hồ Chí Minh">Tp.Hồ Chí Minh</a></h3>
+            <p>
+                {{> flashMessages}}
+            </p>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-12">
+            {{#if subsReady}}
+                <div class="table-responsive">
+                    {{> reactiveTable settings=settings}}
+                </div>
+            {{else}}
+                <p>Đang tải dữ liệu...</p>
+            {{/if}}
+        </div>
+    </div>
+</template>

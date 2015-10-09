@@ -1,0 +1,108 @@
+<template name="report">
+    <div class="row">
+        <div class="col-md-12">
+            {{#if subsReady}}
+            <div class="table-responsive">
+                <table class="table">
+                    <caption><h2>Báo cáo chung</h2></caption>
+                    <thead>
+                        <tr>
+                            <th>Địa điểm</th>
+                            <th>Tổng số</th>
+                            <th>Online</th>
+                            <th>Offline & Khác</th>
+                            <th>Đã đến (Tổng / Online / Offline)</th>
+                            <th>Đến lấy vé</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Hà Nội</td>
+                            <td>{{table1.sum.hanoi}}</td>
+                            <td>{{table1.online.hanoi}}</td>
+                            <td>{{table1.offline.hanoi}}</td>
+                            <td>{{table1.checkin.hanoi.sum}}/{{table1.checkin.hanoi.online}}/{{table1.checkin.hanoi.offline}}</td>
+                            <td>{{table1.ticket.hanoi}}</td>
+                        </tr>
+                        <tr>
+                            <td>Hải Phòng</td>
+                            <td>{{table1.sum.haiphong}}</td>
+                            <td>{{table1.online.haiphong}}</td>
+                            <td>{{table1.offline.haiphong}}</td>
+                            <td>{{table1.checkin.haiphong.sum}}/{{table1.checkin.haiphong.online}}/{{table1.checkin.haiphong.offline}}</td>
+                            <td>{{table1.ticket.haiphong}}</td>
+                        </tr>
+                        <tr>
+                            <td>Tp. Hồ Chí Minh</td>
+                            <td>{{table1.sum.hcm}}</td>
+                            <td>{{table1.online.hcm}}</td>
+                            <td>{{table1.offline.hcm}}</td>
+                            <td>{{table1.checkin.hcm.sum}}/{{table1.checkin.hcm.online}}/{{table1.checkin.hcm.offline}}</td>
+                            <td>{{table1.ticket.hcm}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <caption><h2>Thống kê biết triển lãm qua (chỉ tính số đã đến triển lãm)</h2></caption>
+                    <thead>
+                        <tr>
+                            <th>Địa điểm</th>
+                            <th>Fabebook</th>
+                            <th>Website</th>
+                            <th>Google</th>
+                            <th>Email</th>
+                            <th>Băng rôn</th>
+                            <th>Vnexpress</th>
+                            <th>Dân trí</th>
+                            <th>Bạn bè</th>
+                            <th>Khác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Hà Nội</td>
+                            <td>{{table2 'Hà Nội' 'Facebook SunriseVietnam'}}</td>
+                            <td>{{table2 'Hà Nội' 'Website SunriseVietnam'}}</td>
+                            <td>{{table2 'Hà Nội' 'Google'}}</td>
+                            <td>{{table2 'Hà Nội' 'Email'}}</td>
+                            <td>{{table2 'Hà Nội' 'Băng rôn'}}</td>
+                            <td>{{table2 'Hà Nội' 'Vnexpress'}}</td>
+                            <td>{{table2 'Hà Nội' 'Dân trí'}}</td>
+                            <td>{{table2 'Hà Nội' 'Bạn bè giới thiệu'}}</td>
+                            <td>{{table2 'Hà Nội' 'Khác'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Hải phòng</td>
+                            <td>{{table2 'Hải Phòng' 'Facebook SunriseVietnam'}}</td>
+                            <td>{{table2 'Hải Phòng' 'Website SunriseVietnam'}}</td>
+                            <td>{{table2 'Hải Phòng' 'Google'}}</td>
+                            <td>{{table2 'Hải Phòng' 'Email'}}</td>
+                            <td>{{table2 'Hải Phòng' 'Băng rôn'}}</td>
+                            <td>{{table2 'Hải Phòng' 'Vnexpress'}}</td>
+                            <td>{{table2 'Hải Phòng' 'Dân trí'}}</td>
+                            <td>{{table2 'Hải Phòng' 'Bạn bè giới thiệu'}}</td>
+                            <td>{{table2 'Hải Phòng' 'Khác'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Tp. Hồ Chí Minh</td>
+                            <td>{{table2 'Tp.Hồ Chí Minh' 'Facebook SunriseVietnam'}}</td>
+                            <td>{{table2 'Tp.Hồ Chí Minh' 'Website SunriseVietnam'}}</td>
+                            <td>{{table2 'Tp.Hồ Chí Minh' 'Google'}}</td>
+                            <td>{{table2 'Tp.Hồ Chí Minh' 'Email'}}</td>
+                            <td>{{table2 'Tp.Hồ Chí Minh' 'Băng rôn'}}</td>
+                            <td>{{table2 'Tp.Hồ Chí Minh' 'Vnexpress'}}</td>
+                            <td>{{table2 'Tp.Hồ Chí Minh' 'Dân trí'}}</td>
+                            <td>{{table2 'Tp.Hồ Chí Minh' 'Bạn bè giới thiệu'}}</td>
+                            <td>{{table2 'Tp.Hồ Chí Minh' 'Khác'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            {{else}}
+            <p>Đang tải dữ liệu...</p>
+            {{/if}}
+        </div>
+    </div>
+</template>
