@@ -10,14 +10,7 @@ subs = new SubsManager({
 FlowRouter.route('/', {
     name: 'home',
     subscriptions: function (p, q) {
-        if (q.diadiem) {
-            var params = {
-                Thamdutai: q.diadiem
-            }
-            this.register('myRegisters', subs.subscribe('getRegisters', params));
-        } else {
-            this.register('myRegisters', subs.subscribe('getRegisters', {}));
-        }
+        this.register('myRegisters', subs.subscribe('getRegisters'));
     },
     action: function (p, q) {
         BlazeLayout.render('layout', {main: 'report'});
