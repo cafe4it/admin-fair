@@ -10,7 +10,7 @@ subs = new SubsManager({
 FlowRouter.route('/', {
     name: 'home',
     subscriptions: function (p, q) {
-        this.register('myRegisters', subs.subscribe('getRegisters'));
+        this.register('myRegisters', subs.subscribe('getRegisters',{}));
     },
     action: function (p, q) {
         BlazeLayout.render('layout', {main: 'report'});

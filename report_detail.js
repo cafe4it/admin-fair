@@ -15,7 +15,7 @@ if (Meteor.isClient) {
             if (self.setFilter.get() && self.setFilter.get() === true) {
                 var params = {};
                 if (self.selectedStatus.get()) {
-                    if (self.selectedStatus.get() === "0") params = _.extend(params, {Daden: {$exists: false}});
+                    if (self.selectedStatus.get() === "0") params = _.extend(params, {Daden: false});
                     if (self.selectedStatus.get() === "1") params = _.extend(params, {Daden: true});
                 }
                 if (self.selectedLocation.get()) {
@@ -33,7 +33,7 @@ if (Meteor.isClient) {
                 if(self.selectedYear.get()){
                     params = _.extend(params, {Thoigiandudinh : self.selectedYear.get()});
                 }
-                //subs.clear();
+                console.log('Params : ', params);
                 var subsRegisters = subs.subscribe('getRegisters',params);
                 self.params.set(params);
                 self.subsIsReady.set(subsRegisters);
