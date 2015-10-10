@@ -48,11 +48,11 @@ FlowRouter.route('/lay-ve-xem-phim',{
         if (q.diadiem) {
             var params = {
                 Thamdutai: q.diadiem,
-                Nhapthucong : {$exists : true}
+                Daden : true
             }
             this.register('myRegisters', subs.subscribe('getRegisters', params));
         } else {
-            this.register('myRegisters', subs.subscribe('getRegisters', {Nhapthucong : {$exists : true}}));
+            this.register('myRegisters', subs.subscribe('getRegisters', {Daden : true}));
         }
     },
     action: function (p, q) {
@@ -233,7 +233,14 @@ if (Meteor.isClient) {
 
     Template.input1.helpers({
         settings: function () {
-            var registers = RegistersCheckin.find();
+            var diadiem = FlowRouter.getQueryParam('diadiem');
+            var params = {
+                Nhapthucong : {$exists : true}
+            }
+            if(diadiem){
+                params.Thamdutai = diadiem;
+            }
+            var registers = RegistersCheckin.find(params);
             return {
                 collection: registers,
                 rowsPerPage: 100,

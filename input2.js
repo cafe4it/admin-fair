@@ -1,7 +1,14 @@
 if(Meteor.isClient){
     Template.input2.helpers({
         settings: function () {
-            var registers = RegistersCheckin.find();
+            var params = {
+                Daden : true
+            }
+            var diadiem = FlowRouter.getQueryParam('diadiem');
+            if(diadiem){
+                params.Thamdutai = diadiem;
+            }
+            var registers = RegistersCheckin.find(params);
             return {
                 collection: registers,
                 rowsPerPage: 100,
